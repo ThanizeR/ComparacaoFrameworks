@@ -12,7 +12,7 @@ def predict_pneumonia(img):
     img = np.asarray(img)
     img = img.reshape((1,36,36,1))
     img = img / 255.0
-    model = load_model("/Users/thanizeassuncaorodrigues/Documents/GitHub/DiagnoSys/models/pneumonia.h5")
+    model = load_model("/Users/thanizerodrigues/Desktop/ComparacaoFrameworks/models/pneumonia.h5")
     pred_probs = model.predict(img)[0]
     pred_class = np.argmax(pred_probs)
     pred_prob = pred_probs[pred_class]
@@ -29,7 +29,7 @@ def predict_malaria(img):
     img = np.asarray(img)
     img = img.reshape((1,36,36,3))
     img = img.astype(np.float64)
-    model = load_model("/Users/thanizeassuncaorodrigues/Documents/GitHub/DiagnoSys/models/malaria.h5")
+    model = load_model("/Users/thanizerodrigues/Desktop/ComparacaoFrameworks/models/malaria.h5")
     pred_probs = model.predict(img)[0]
     pred_class = np.argmax(pred_probs)
     pred_prob = pred_probs[pred_class]
@@ -39,7 +39,7 @@ def predict_malaria(img):
         pred_label = "Não está infectado"
     return pred_label, pred_prob
 
-with open('/Users/thanizeassuncaorodrigues/Documents/GitHub/DiagnoSys/models/diabetes_model.sav', 'rb') as file:
+with open('/Users/thanizerodrigues/Desktop/ComparacaoFrameworks/models/diabetes_model.sav', 'rb') as file:
     diabetes_model = pickle.load(file)
 
 # Função de previsão de diabetes
@@ -110,7 +110,7 @@ tabbed_interface = gr.TabbedInterface(
         # Guia 2: Previsão de Pneumonia
         gr.Interface(
             predict_pneumonia,
-            inputs=gr.inputs.Image(label="Imagem para Predição de Pneumonia"),
+            inputs=gr.Image(label="Imagem para Predição de Pneumonia"),
             outputs=["text", "text"],
             title="Previsão de Pneumonia",
             description="Faça o upload de uma imagem para prever se há pneumonia."
@@ -119,7 +119,7 @@ tabbed_interface = gr.TabbedInterface(
         # Guia 3: Previsão de Malária
         gr.Interface(
             predict_malaria,
-            inputs=gr.inputs.Image(label="Imagem para Predição de Malária"),
+            inputs=gr.Image(label="Imagem para Predição de Malária"),
             outputs=["text", "text"],
             title="Previsão de Malária",
             description="Faça o upload de uma imagem para prever se há malária."
